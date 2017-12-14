@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    color: #555;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 400;
+}
+h3{
+    color: #a1a1a1;
+}
+.add-button{
+    color: #28B9B5;
+    background-color: #f4f4f4;
+    border: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.add-button:focus{
+    outline: 0;
+}
+.top{
+    height: 220px;
+    text-align: center;
+    background-color: #008CBA;
+    margin: 0 0 0 0;
+}
+.today-tasks{
+    color: #fff;
+    font-size: 25px;
+    padding: 50px 0 50px 0;
+}
+.how-many-tasks, .solved-tasks-number{
+    display: inline-block   ;
+    width: 250px;
+    margin: 0 15px 0 15px;
+    color: #fff;
+}
+.how-many-tasks{
+    background-color: #d64026;
+    padding: 15px;
+}
+.solved-tasks-number{
+    background-color: #28B9B3;
+    padding: 15px;
+}
+.bottom{
+    height: auto;
+    text-align: center;
+}
+.addnew{
+    height: 60px;
+    padding-top: 8px;
+    background-color: #f4f4f4;    
+}
+.addnew span{
+    padding: 0 10px 0 0;
+    font-weight: 600;
+}
+input[type="text"]{
+    width: 400px;
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 11px 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+input[type="text"]:focus {
+    outline: none;
+    border: 1px solid #28B9B5;
+}
+.tasks{
+    width: 850px;
+    margin: 60px auto;
+}
+.to-do-tasks, .solved-tasks{
+    width: 400px;
+    display: inline-block;
+    margin: 0 10px 0 10px;
+    float: left;
+}
+.ttask, .stask{
+    border: thin solid #e9e9e9;
+    border-radius: 5px;
+    height: 35px;   
+    text-align: left;
+    padding: 2px 0 0 10px;
+    color: #fff;
+}
+.ttask{
+    background-color: #d64026;
+}
+.stask{
+    background-color: #28B9B3;
+}
+.tasks h3{
+    text-align: left;
+    margin: 0 0 10px 0; 
+}
+.tsk, .del-solved{
+    display: inline-block;
+    vertical-align: middle;
+}
+.tsk{
+    width: 295px;
+}
+.del, .solved{
+    display: inline-block;
+    width: 40px;
+    float: left;
+    text-align: right;
+}
+.red{
+    border: 1px solid red!important;  
+}

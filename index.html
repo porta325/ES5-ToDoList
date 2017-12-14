@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,600" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="style.css">
+        <title>TO-DO list</title>
+    </head>
+    <body>
+        <div class="top">
+            <div class="today-tasks">TO-DO list for today, <span class="day">%day</span>, <span class="date">%date</span> </div>
+            <div class="how-many-tasks">TO-DO tasks: <span class="task_number">%number</span></div>
+            <div class="solved-tasks-number">Solved tasks: <span class="solved_task_number">%number</span></div>
+        </div>
+        <div class="bottom">
+            <div class="addnew">
+                <input type="text" class="add-input" placeholder="Add task for today" />
+                <button class="add-button"><i class="fa fa-plus fa-2x"></i></button>
+            </div>
+            
+            <div class="tasks">      
+                <div class="to-do-tasks">
+                    <h3>TO-DO Tasks</h3>
+                    <!--
+                    <div class="ttask" id="%id%">
+                        <div class="tsk">%desc%</div>
+                        <div class="del-solved">
+                            <div class="del"><i class="fa fa-trash-o fa-lg"></i></div>
+                            <div class="solved"><i class="fa fa-check-circle fa-lg"></i></div>
+                        </div>
+                    </div>  
+                    -->
+                </div>
+                <div class="solved-tasks">
+                    <h3>Solved Tasks</h3>
+                    <!--
+                    <div class="stask" id="%id">
+                        <div class="tsk">aaaaa</div>
+                        <div class="del-solved">
+                            <div class="del">&nbsp</div>
+                            <div class="solved"><i class="fa fa-check fa-lg"></i></div>
+                        </div>
+                    </div>    
+                    -->
+                </div>
+            </div>
+        </div>
+        
+    <script src="script.js"></script>    
+    </body>
+</html>
+<!--
+
+
