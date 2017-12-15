@@ -6,7 +6,7 @@ var todoController = (function(){
         solvedTasks: 0,
         tasksArr: [],
         solvedTasksArr: []
-    } 
+    }; 
     
     return{
         
@@ -17,8 +17,46 @@ var todoController = (function(){
 //UI Controller
 var UIController = (function(){
     
+    //Assign DOM strings
+    var DOMStrings = {
+        dayOfWeek: '.day',
+        date: '.date',
+        tasksNumber: '.task_number',
+        solvedTasksNumber: '.solved_task_number',
+        addInput: '.add-input',
+        addButton: '.add-button',
+        toDoTasks: '.to-do-tasks',
+        solvedTasks: '.solved-tasks',
+        toDoContainer: '.ttask',
+        solvedContainer: '.stask',
+        deleteTask: '.del',
+        tasks: '.tasks'
+    };
+    
     return {
-        
+        getDOMStrings: function(){
+            return DOMStrings;  
+        },
+        displayDayOfTheWeek: function(){
+            var day, date;
+            date = new Date();
+            day = date.getDay();
+            dayArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            dayOfTheWeek = dayArr[day];
+            document.querySelector(DOMStrings.dayOfWeek).textContent = dayOfTheWeek;
+        },
+        displayFullDate: function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear(); 
+            date = dd + '/' + mm + '/' + yyyy;
+            document.querySelector(DOMStrings.date).textContent = date;
+        },
+        displayTasksInUI : function(obj){
+              document.querySelector(DOMStrings.tasksNumber).textContent = obj.unsolved;
+              document.querySelector(DOMStrings.solvedTasksNumber).textContent = obj.solved;
+        }  
     }
     
 })();
@@ -35,6 +73,9 @@ var appController = (function(todoCtrl, UICtrl){
             }       
          });
     };
+    //Get DOM Strings
+    var DOM = UICtrl.getDOMStrings();
+
     var addItem =  function(){
         //Add items   
     }
@@ -45,6 +86,12 @@ var appController = (function(todoCtrl, UICtrl){
             //Setup event listeners
             setupEventListeners();
             //Display day and date
+            UICtrl.displayDayOfTheWeek();
+            UICtrl.displayFullDate();  
+            UICtrl.displayTasksInUI({
+                unsolved: 0,
+                solved: 0
+            });
         }    
         
     }    
