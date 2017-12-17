@@ -4,16 +4,16 @@ var todoController = (function(){
     var Element = function(id, description){
         this.id = id;
         this.description = description;
-    };    
+    };
     
     var data = {
         unsolvedTasks: 0,
         solvedTasks: 0,
         tasksArr: [],
         solvedTasksArr: []
-    }; 
+    }
     
-    return{
+    return {
         addData: function(desc){
             var element, ID;
             if(data.tasksArr.length === 0){
@@ -23,6 +23,18 @@ var todoController = (function(){
             }
             element = new Element(ID, desc);
             data.tasksArr.push(element);
+            return element;
+        },
+        
+        copyData: function(desc){
+            var element, ID;
+            if(data.solvedTasksArr.length === 0){
+                ID = 0;
+            } else if (data.solvedTasksArr.length > 0){
+                ID = data.solvedTasksArr[data.solvedTasksArr.length - 1].id + 1;
+            }
+            element = new Element(ID, desc);
+            data.solvedTasksArr.push(element);
             return element;
         },
         
@@ -45,7 +57,12 @@ var todoController = (function(){
             });
             rem = elem.indexOf(id);
             data.tasksArr.splice(rem, 1);
-        }       
+        },
+        
+        lastElementInSolved: function(){
+            lastElement = data.solvedTasksArr[data.solvedTasksArr.length - 1];
+            return lastElement;
+        }
     }
     
 })();
@@ -53,7 +70,6 @@ var todoController = (function(){
 //UI Controller
 var UIController = (function(){
     
-    //Assign DOM strings
     var DOMStrings = {
         dayOfWeek: '.day',
         date: '.date',
@@ -108,14 +124,22 @@ var UIController = (function(){
             newHTML = html.replace('%id%', obj.id);
             newHTML = newHTML.replace('%desc%', obj.description);
             document.querySelector(DOMStrings.toDoTasks).insertAdjacentHTML('beforeend', newHTML);
+        },
+        createSolvedHTMLElement: function(obj){
+            var html, newHTML;
+            html = '<div class="stask" id="%id%"><div class="tsk">%desc%</div><div class="del-solved"><div class="del">&nbsp</div><div class="solved"><i class="fa fa-check fa-lg"></i></div></div></div>';
+            newHTML = html.replace('%id%', obj.id);
+            newHTML = newHTML.replace('%desc%', obj.description);
+            document.querySelector(DOMStrings.solvedTasks).insertAdjacentHTML('beforeend', newHTML);
         }
+
     }
     
 })();
 
 //App controller
 var appController = (function(todoCtrl, UICtrl){
-    
+
     //Set event listeners
     var setupEventListeners = function(){
          document.querySelector(DOM.addButton).addEventListener('click', addItem);
@@ -125,11 +149,13 @@ var appController = (function(todoCtrl, UICtrl){
             }       
          });
         document.querySelector(DOM.tasks).addEventListener('click', deleteItem);
+        document.querySelector(DOM.tasks).addEventListener('click', moveItem);
     };
+
     //Get DOM Strings
     var DOM = UICtrl.getDOMStrings();
-
-        //Update task number
+    
+    //Update task number
     var updateTasks = function(){
         //Get number of tasks in our data structure
         todoCtrl.noOfTasks();
@@ -181,6 +207,32 @@ var appController = (function(todoCtrl, UICtrl){
         } 
     };
     
+    //Move Item to solved
+    var moveItem = function(){
+        var clickedId, itemId, parent, child, copy, descript;
+        
+        clickedId = event.target.parentNode.id;
+        itemId = parseFloat(event.target.parentNode.parentNode.parentNode.id);
+        
+        if(clickedId === 'solved'){
+            clickedId = event.target.parentNode.id;
+            descript = event.target.parentNode.parentNode.parentNode.innerText;
+            //Copy task from unsolved to solved into the data structuree
+            todoCtrl.copyData(descript);
+            //Delete from data stucture
+            todoCtrl.deleteItem(itemId);
+            //Delete from the UI
+            parent = event.target.parentNode.parentNode.parentNode.parentNode;
+            child = document.getElementById(itemId);
+            parent.removeChild(child);
+            //Add moved task to the UI
+            var lastMovedElement = todoCtrl.lastElementInSolved();
+            UICtrl.createSolvedHTMLElement(lastMovedElement);
+            //Update Tasks
+            updateTasks();
+        }
+    }
+     
     return{
         
         init: function(){
@@ -195,9 +247,10 @@ var appController = (function(todoCtrl, UICtrl){
             });
         }    
         
-    }    
+    }
     
 })(todoController, UIController);
+
 
 
 appController.init();
