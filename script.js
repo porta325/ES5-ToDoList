@@ -208,7 +208,7 @@ var appController = (function(todoCtrl, UICtrl){
     };
     
     //Move Item to solved
-    var moveItem = function(){
+    var moveItem = function(event){
         var clickedId, itemId, parent, child, copy, descript;
         
         clickedId = event.target.parentNode.id;
